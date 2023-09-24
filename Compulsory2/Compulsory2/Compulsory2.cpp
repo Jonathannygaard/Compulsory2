@@ -3,7 +3,6 @@
 #include <chrono>
 
 std::vector<int> Vector;
-
 void swap(std::vector<int>& v, int x, int y);
 
 void create_vector(std::vector <int> v)
@@ -49,7 +48,7 @@ void quicksort(std::vector<int> &vec, int L, int R) {
             j--;
 
         if (i <= j) {
-            swap(vec, i, j); //error=swap function doesnt take 3 arguments
+            swap(vec, i, j);
             i++;
             j--;
         }
@@ -78,13 +77,32 @@ void print_vector(std::vector <int> v)
     }
 }
 
+void Selection_sort(std::vector <int> v)
+{
+    int min_index;
+    for (size_t i = 0; i < v.size() - 1; i++)
+    {
+        min_index = i;
+        for (size_t j = i + 1; j < v.size(); j++)
+        {
+            if (v[j] < v[min_index])
+            {
+                min_index = j;
+            }
+        }
+        std::swap(v[min_index], v[i]);
+    }
+    Vector = v;
+}
+
 int main(int argc, char* argv[])
 {
     std::srand(std::time(nullptr));
     create_vector(Vector);
     auto TimeStart = std::chrono::high_resolution_clock::now();
     //bubblesort(Vector);
-    quicksort(Vector,0,Vector.size()-1);
+    //quicksort(Vector,0,Vector.size()-1);
+    Selection_sort(Vector);
     auto TimeEnd = std::chrono::high_resolution_clock::now();
     print_vector(Vector);
     std::cout << "Time to sort:" << std::chrono::duration_cast<std::chrono::milliseconds>((TimeEnd) - (TimeStart)).count() << "ms" << std::endl; 
