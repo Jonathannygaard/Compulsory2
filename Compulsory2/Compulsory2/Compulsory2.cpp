@@ -4,6 +4,8 @@
 
 std::vector<int> Vector;
 
+void swap(std::vector<int>& v, int x, int y);
+
 void create_vector(std::vector <int> v)
 {
     for (int i = 0; i < 10000; i++)
@@ -15,12 +17,11 @@ void create_vector(std::vector <int> v)
 
 void bubblesort(std::vector <int> v)
 {
-    int i, j;
     bool swapped;
-    for (i = 0; i < v.size() - 1; i++)
+    for (size_t i = 0; i < v.size() - 1; i++)
     {
         swapped = false;
-        for (j = 0; j < v.size() - i - 1; j++)
+        for (size_t j = 0; j < v.size() - i - 1; j++)
         {
             if (v[j] > v[j + 1])
             {
@@ -34,9 +35,44 @@ void bubblesort(std::vector <int> v)
     Vector = v;
 }
 
+void quicksort(std::vector<int> &vec, int L, int R) {
+    int i, j, mid, piv;
+    i = L;
+    j = R;
+    mid = L + (R - L) / 2;
+    piv = vec[mid];
+
+    while (i<R || j>L) {
+        while (vec[i] < piv)
+            i++;
+        while (vec[j] > piv)
+            j--;
+
+        if (i <= j) {
+            swap(vec, i, j); //error=swap function doesnt take 3 arguments
+            i++;
+            j--;
+        }
+        else {
+            if (i < R)
+                quicksort(vec, i, R);
+            if (j > L)
+                quicksort(vec, L, j);
+            return;
+        }
+    }
+}
+
+void swap(std::vector<int>& v, int x, int y) {
+    int temp = v[x];
+    v[x] = v[y];
+    v[y] = temp;
+
+}
+
 void print_vector(std::vector <int> v)
 {
-    for (int i = 0; i < v.size(); i++)
+    for (size_t i = 0; i < v.size(); i++)
     {
         std::cout << v[i] << std::endl;
     }
@@ -46,8 +82,12 @@ int main(int argc, char* argv[])
 {
     std::srand(std::time(nullptr));
     create_vector(Vector);
-    bubblesort(Vector);
+    auto TimeStart = std::chrono::high_resolution_clock::now();
+    //bubblesort(Vector);
+    quicksort(Vector,0,Vector.size()-1);
+    auto TimeEnd = std::chrono::high_resolution_clock::now();
     print_vector(Vector);
+    std::cout << "Time to sort:" << std::chrono::duration_cast<std::chrono::milliseconds>((TimeEnd) - (TimeStart)).count() << "ms" << std::endl; 
     return 0;
 }
 
