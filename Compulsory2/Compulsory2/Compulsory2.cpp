@@ -5,10 +5,11 @@
 std::vector<int> Vector;
 void swap(std::vector<int>& v, int x, int y);
 int Sorting;
+int Size;
 
 void create_vector(std::vector <int> v)
 {
-    for (int i = 0; i < 10000; i++)
+    for (int i = 0; i < Size; i++)
     {
         v.push_back(rand() % 10000);
     }
@@ -128,12 +129,13 @@ void print_vector(std::vector <int> v)
     }
 }
 
-
 int main(int argc, char* argv[])
 {
     std::srand(std::time(nullptr));
+    std::cout << "How many numbers in vector?" << std::endl;
+    std::cin >> Size;
     create_vector(Vector);
-    std::cout << "Choose sorting algorithm: 1. BubbleSort 2. QuickSort 3. MergeSort" << std::endl;
+    std::cout << "Choose sorting algorithm:"<< "\n" << "1. Bubblesort" << "\n" << "2. Quicksort" << "\n" << "3. Mergesort"<< std::endl;
     std::cin >> Sorting;
     auto TimeStart = std::chrono::high_resolution_clock::now();
     switch (Sorting)
@@ -145,13 +147,12 @@ int main(int argc, char* argv[])
             quicksort(Vector, 0, Vector.size() - 1);
             break;
          default:
-            merge_sort(Vector, 0, Vector.size()-1);
+            merge_sort(Vector, 0, Vector.size() - 1);
             break;
     }
     auto TimeEnd = std::chrono::high_resolution_clock::now();
     print_vector(Vector);
     std::cout << "Time to sort:" << std::chrono::duration_cast<std::chrono::milliseconds>((TimeEnd) - (TimeStart)).count() << "ms" << std::endl; 
     return 0;
-    
 }
 
