@@ -8,14 +8,14 @@ int Sorting;
 int Size;
 
 /// \brief Creating vector with random numbers
-/// \param v Vector to be created
-void create_vector(std::vector <int> v)
+/// \param temp_vector Vector to be created
+void create_vector(std::vector <int> temp_vector)
 {
     for (int i = 0; i < Size; i++)
     {
-        v.push_back(rand() % 10000);
+        temp_vector.push_back(rand() % 10000);
     }
-    Vector = v;
+    Vector = temp_vector;
 }
 
 /// \brief Sorting vector using bubblesort
@@ -41,11 +41,15 @@ void bubblesort(std::vector <int> v)
     Vector = v;
 }
 
+
+/// \brief Swapping two elements in vector
+/// \param v Vector to be sorted
+/// \param x First element
+/// \param y Second element
 void swap(std::vector<int>& v, int x, int y) {
     int temp = v[x];
     v[x] = v[y];
     v[y] = temp;
-
 }
 
 /// \brief Sorting vector using quicksort
@@ -80,6 +84,11 @@ void quicksort(std::vector<int> &vec, int L, int R) {
     }
 }
 
+/// \brief Merging two vectors
+/// \param vec Vector to be sorted
+/// \param L Left most index
+/// \param M Middle index
+/// \param R Right most index
 void merge(std::vector<int>& vec, int L, int M, int R) {
     int i, j, k;
     int n1 = M - L + 1;
@@ -167,8 +176,10 @@ int main(int argc, char* argv[])
             break;
     }
     auto TimeEnd = std::chrono::high_resolution_clock::now();
-    print_vector(Vector);
-    std::cout << "Time to sort:" << std::chrono::duration_cast<std::chrono::milliseconds>((TimeEnd) - (TimeStart)).count() << "ms" << std::endl; 
+    //print_vector(Vector);
+    std::chrono::duration<float> duration = TimeEnd - TimeStart;
+    float ms = duration.count() * 1000.0f;
+    std::cout << "Time to sort:" << ms << "ms" << std::endl; 
     return 0;
 }
 
