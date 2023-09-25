@@ -7,6 +7,8 @@ void swap(std::vector<int>& v, int x, int y);
 int Sorting;
 int Size;
 
+/// \brief Creating vector with random numbers
+/// \param v Vector to be created
 void create_vector(std::vector <int> v)
 {
     for (int i = 0; i < Size; i++)
@@ -16,8 +18,11 @@ void create_vector(std::vector <int> v)
     Vector = v;
 }
 
+/// \brief Sorting vector using bubblesort
+/// \param v Vector to be sorted
 void bubblesort(std::vector <int> v)
 {
+    
     bool swapped;
     for (size_t i = 0; i < v.size() - 1; i++)
     {
@@ -43,6 +48,10 @@ void swap(std::vector<int>& v, int x, int y) {
 
 }
 
+/// \brief Sorting vector using quicksort
+/// \param vec Vector to be sorted
+/// \param L Left most index
+/// \param R Right most index
 void quicksort(std::vector<int> &vec, int L, int R) {
     int i, j, mid, piv;
     i = L;
@@ -113,6 +122,10 @@ void merge(std::vector<int>& vec, int L, int M, int R) {
     }
 }
 
+/// \brief Sorting vector using mergesort
+/// \param vec Vector to be sorted
+/// \param L Left most index
+/// \param R Right most index
 void merge_sort(std::vector<int>& vec, int L, int R) {
     if (L < R) {
         int M = (L + R) / 2;
@@ -121,6 +134,9 @@ void merge_sort(std::vector<int>& vec, int L, int R) {
         merge(vec, L, M, R);
     }
 }
+
+/// \brief Printing vector
+/// \param v Vector to be printed
 void print_vector(std::vector <int> v)
 {
     for (size_t i = 0; i < v.size(); i++)
