@@ -8,14 +8,14 @@ int Sorting;
 int Size;
 
 /// \brief Creating vector with random numbers
-/// \param temp_vector Vector to be created
-void create_vector(std::vector <int> temp_vector)
+/// \param vector Vector to be created
+void create_vector(std::vector <int> vector)
 {
     for (int i = 0; i < Size; i++)
     {
-        temp_vector.push_back(rand() % 10000);
+        vector.push_back(rand() % 10000);
     }
-    Vector = temp_vector;
+    Vector = vector;
 }
 
 /// \brief Sorting vector using bubblesort
